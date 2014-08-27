@@ -1,0 +1,2 @@
+include:
+- suitecrm.server.service

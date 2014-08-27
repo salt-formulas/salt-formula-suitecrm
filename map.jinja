@@ -1,0 +1,14 @@
+
+{%- set version = salt['pillar.get']('suitecrm:server:version') %}
+
+{%- set server = salt['grains.filter_by']({
+    'Linux': {
+        'dir': '/srv/suitecrm',
+        'service': 'suitecrm',
+        'source': {
+            'engine': 'salt',
+            'host': '_files/suitecrm',
+            'file': 'SuiteCRM-'+version+'-MAX.zip'
+        },
+    },
+}, grain='kernel', merge=salt['pillar.get']('suitecrm:server')) %}

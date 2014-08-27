@@ -7,7 +7,11 @@ SuiteCRM is SugarCRM, Supercharged! SuiteCRM is a fork of the popular open sourc
 
     suitecrm:
       server:
-        enabled: True
+        enabled: true
+        version: 7.1.3
+        bind:
+          address: 0.0.0.0
+          port: 8080
 
 ## Read more
 
