@@ -5,10 +5,6 @@
     'Linux': {
         'dir': '/srv/suitecrm',
         'service': 'suitecrm',
-        'source': {
-            'engine': 'salt',
-            'host': '_files/suitecrm',
-            'file': 'SuiteCRM-'+version+'-MAX.zip'
-        },
+        'app': {}
     },
 }, grain='kernel', merge=salt['pillar.get']('suitecrm:server')) %}

@@ -8,10 +8,16 @@ SuiteCRM is SugarCRM, Supercharged! SuiteCRM is a fork of the popular open sourc
     suitecrm:
       server:
         enabled: true
-        version: 7.1.3
-        bind:
-          address: 0.0.0.0
-          port: 8080
+        app:
+          devel:
+            enabled: true
+            version: '7.1.3'
+            database:
+              engine: 'postgresql'
+              host: '127.0.0.1'
+              name: 'suitecrm_devel'
+              password: 'password'
+              user: 'suitecrm_devel'
 
 ## Read more
 
