@@ -5,11 +5,22 @@ SuiteCRM is SugarCRM, Supercharged! SuiteCRM is a fork of the popular open sourc
 
 ## Sample pillars
 
+Simple hosting with 2 apps
+
     suitecrm:
       server:
         enabled: true
         app:
-          devel:
+          devel1:
+            enabled: true
+            version: '7.1.3'
+            database:
+              engine: 'postgresql'
+              host: '127.0.0.1'
+              name: 'suitecrm_devel'
+              password: 'password'
+              user: 'suitecrm_devel'
+          devel2:
             enabled: true
             version: '7.1.3'
             database:
@@ -22,4 +33,4 @@ SuiteCRM is SugarCRM, Supercharged! SuiteCRM is a fork of the popular open sourc
 ## Read more
 
 * https://suitecrm.com/
-* installation guide https://suitecrm.com/index.php?option=com_wrapper&view=wrapper&Itemid=1383
+* https://suitecrm.com/index.php?option=com_wrapper&view=wrapper&Itemid=1383 installation guide

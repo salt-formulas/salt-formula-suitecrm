@@ -1,7 +1,17 @@
 {%- from "suitecrm/map.jinja" import server with context %}
 {%- if server.enabled %}
 
+include:
+- suitecrm.server.service
+
 {%- for app_name, app in server.app.iteritems() %}
+
+/srv/suitecrm/sites/{{ app_name }}:
+  file.directory:
+  - user: root
+  - group: www-data
+  - mode: 770
+  - makedirs: true
 
 suitecrm_{{ app_name }}_archive:
   archive.extracted:
@@ -12,9 +22,8 @@ suitecrm_{{ app_name }}_archive:
   - require:
     - pkg: suitecrm_packages
     - file: suitecrm_dir
-    - user: suitecrm_user
 
-{{ server.dir }}/eclipse/suitecrm.conf:
+{{ server.dir }}/suitecrm.conf:
   file.managed:
   - source: salt://suitecrm/files/suitecrm.conf
   - user: root
@@ -26,41 +35,12 @@ suitecrm_{{ app_name }}_archive:
   - watch_in:
     - service: suitecrm_service
 
-{{ server.dir }}/eclipse/suitecrm.ini:
-  file.managed:
-  - source: salt://suitecrm/files/suitecrm.ini
-  - user: root
-  - group: root
-  - mode: 644
-  - template: jinja
-  - require:
-    - archive: suitecrm_archive
-  - watch_in:
-    - service: suitecrm_service
-
-
-
-/srv/suitecrm/sites/{{ app_name }}/data:
-  file.directory:
-  - user: root
-  - group: www-data
-  - mode: 770
-  - makedirs: true
-
 /srv/suitecrm/sites/{{ app_name }}/theme:
   file.directory:
   - user: root
   - group: www-data
   - mode: 770
   - makedirs: true
-
-suitecrm_{{ app_name }}_git:
-  git.latest:
-  - name: {{ server.git_source }}
-  - rev: suitecrm_{{ app.version|replace(".", "") }}_STABLE
-  - target: /srv/suitecrm/sites/{{ app_name }}/root 
-  - require:
-    - pkg: git_packages
 
 /srv/suitecrm/sites/{{ app_name }}/root/config.php:
   file.managed:
@@ -71,18 +51,6 @@ suitecrm_{{ app_name }}_git:
     - git: suitecrm_{{ app_name }}_git
   - defaults:
     app_name: "{{ app_name }}"
-
-{%- if app.theme is defined %}
-
-suitecrm_{{ app_name }}_theme:
-  git.latest:
-  - name: {{ app.theme.address }}
-  - target: /srv/suitecrm/sites/{{ app_name }}/theme/{{ app.theme.name }}
-  - rev: {{ app.theme.get('branch', 'master') }}
-  - require:
-    - file: /srv/suitecrm/sites/{{ app_name }}/theme
-
-{%- endif %}
 
 {%- if app.initial_data is defined %}
 
