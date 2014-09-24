@@ -27,7 +27,7 @@ suitecrm_{{ app_name }}_move:
   cmd.run:
     - cwd: /root
     - name: mv /root/suitecrm-{{ app.version }}-max/* /srv/suitecrm/sites/{{ app_name }}
-    - unless: "timeout 10 ls -l /srv/suitecrm/sites/{{ app_name }}"
+    - unless: "timeout 10 ls -l /srv/suitecrm/sites/{{ app_name }}/*"
     - require:
       - archive: suitecrm_{{ app_name }}_archive
 
