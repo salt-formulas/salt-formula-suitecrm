@@ -32,12 +32,9 @@ suitecrm_{{ app_name }}_move:
       - archive: suitecrm_{{ app_name }}_archive
 
 suitecrm_{{ app_name }}_perms:
-  file.recurse:
-    - name: /srv/suitecrm/sites/{{ app_name }}
-    - user: root
-    - group: root
-    - file_mode: 644
-    - dir_mode: 755
+  cmd.run:
+    - cwd: /root
+    - name: chmod 644 /srv/suitecrm/sites/{{ app_name }}; chmod 644 $(find /srv/suitecrm/sites/{{ app_name }} -type f)
     - require:
       - cmd: suitecrm_{{ app_name }}_move
 
