@@ -34,7 +34,7 @@ suitecrm_{{ app_name }}_move:
 suitecrm_{{ app_name }}_perms:
   cmd.run:
     - cwd: /root
-    - name: chmod 644 /srv/suitecrm/sites/{{ app_name }}; chmod 644 $(find /srv/suitecrm/sites/{{ app_name }} -type f)
+    - name: chmod 644 /srv/suitecrm/sites/{{ app_name }}; find /srv/suitecrm/sites/{{ app_name }} -type d -print0 | xargs -0 chmod 755;
     - require:
       - cmd: suitecrm_{{ app_name }}_move
 
