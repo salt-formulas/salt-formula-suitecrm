@@ -31,14 +31,15 @@ suitecrm_{{ app_name }}_move:
     - require:
       - archive: suitecrm_{{ app_name }}_archive
 
-/srv/suitecrm/sites/{{ app_name }}:
-  file.directory:
+suitecrm_{{ app_name }}_perms:
+  file.recurse:
+    - name: /srv/suitecrm/sites/{{ app_name }}
     - user: root
     - group: root
     - file_mode: 644
     - dir_mode: 755
-    - recurse:
-      -  *
+    - require:
+      - cmd: suitecrm_{{ app_name }}_move
 
 {#
 {{ server.dir }}/suitecrm.conf:
