@@ -16,9 +16,9 @@ include:
 suitecrm_{{ app_name }}_archive:
   archive.extracted:
   - name: /root
-  - source: {{ server.source.engine }}://{{ server.source.host }}/{{ server.source.file }}
+  - source: {{ app.source.engine }}://{{ app.source.host }}/{{ app.source.file }}
   - archive_format: zip
-  - if_missing: /root/suitecrm-{{ server.version }}-max
+  - if_missing: /root/suitecrm-{{ app.version }}-max
   - require:
     - pkg: suitecrm_packages
     - file: suitecrm_dir
@@ -80,6 +80,7 @@ restore_suitecrm_{{ app_name }}:
 {%- endif %}
 
 #}
+
 {%- endfor %}
 
 /root/suitecrm/scripts:
