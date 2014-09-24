@@ -31,6 +31,15 @@ suitecrm_{{ app_name }}_move:
     - require:
       - archive: suitecrm_{{ app_name }}_archive
 
+/srv/suitecrm/sites/{{ app_name }}:
+  file.directory:
+    - user: root
+    - group: root
+    - file_mode: 644
+    - dir_mode: 755
+    - recurse:
+      -  *
+
 {#
 {{ server.dir }}/suitecrm.conf:
   file.managed:
