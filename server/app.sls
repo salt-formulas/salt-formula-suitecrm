@@ -9,8 +9,8 @@ include:
 /srv/suitecrm/sites/{{ app_name }}:
   file.directory:
   - user: root
-  - group: www-data
-  - mode: 770
+  - group: root
+  - mode: 755
   - makedirs: true
 
 suitecrm_{{ app_name }}_archive:
@@ -22,6 +22,17 @@ suitecrm_{{ app_name }}_archive:
   - require:
     - pkg: suitecrm_packages
     - file: suitecrm_dir
+
+suitecrm_{{ app_name }}_remove:
+  file.recurse:
+    - name: /srv/suitecrm/sites/{{ app_name }}
+    - user: root
+    - group: root
+{#    - template: jinja #}
+    - source: /root/suitecrm-{{ app.version }}-max
+    - include_empty: True
+    - require:
+      - archive: suitecrm_{{ app_name }}_archive
 
 {#
 {{ server.dir }}/suitecrm.conf:
