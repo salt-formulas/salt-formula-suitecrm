@@ -23,14 +23,11 @@ suitecrm_{{ app_name }}_archive:
     - pkg: suitecrm_packages
     - file: suitecrm_dir
 
-suitecrm_{{ app_name }}_remove:
-  file.recurse:
-    - name: /srv/suitecrm/sites/{{ app_name }}
-    - user: root
-    - group: root
-{#    - template: jinja #}
-    - source: /root/suitecrm-{{ app.version }}-max
-    - include_empty: True
+suitecrm_{{ app_name }}_move:
+  cmd.run:
+    - cwd: /root
+    - name: mv /root/suitecrm-{{ app.version }}-max/* /srv/suitecrm/sites/{{ app_name }}
+    - unless: "timeout 10 ls -l /srv/suitecrm/sites/{{ app_name }}"
     - require:
       - archive: suitecrm_{{ app_name }}_archive
 
