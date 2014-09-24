@@ -23,6 +23,7 @@ suitecrm_{{ app_name }}_archive:
     - pkg: suitecrm_packages
     - file: suitecrm_dir
 
+{#
 {{ server.dir }}/suitecrm.conf:
   file.managed:
   - source: salt://suitecrm/files/suitecrm.conf
@@ -67,6 +68,7 @@ suitecrm_{{ app_name }}_archive:
     - file: /root/suitecrm/scripts
     - file: /root/suitecrm/flags
 
+
 restore_suitecrm_{{ app_name }}:
   cmd.run:
   - name: /root/suitecrm/scripts/restore_{{ app_name }}.sh
@@ -77,6 +79,7 @@ restore_suitecrm_{{ app_name }}:
 
 {%- endif %}
 
+#}
 {%- endfor %}
 
 /root/suitecrm/scripts:
