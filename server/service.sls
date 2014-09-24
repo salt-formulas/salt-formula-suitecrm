@@ -1,8 +1,9 @@
 {%- from "suitecrm/map.jinja" import server with context %}
 {%- if server.enabled %}
 
-include:
+{# include:
 - php
+#}
 
 suitecrm_packages:
   pkg.installed:
