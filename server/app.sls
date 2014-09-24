@@ -8,8 +8,8 @@ include:
 
 /srv/suitecrm/sites/{{ app_name }}:
   file.directory:
-  - user: root
-  - group: root
+  - user: www-data
+  - group: www-data
   - mode: 755
   - makedirs: true
 
@@ -38,6 +38,20 @@ suitecrm_{{ app_name }}_perms:
     - require:
       - cmd: suitecrm_{{ app_name }}_move
 
+suitecrm_{{ app_name }}_owners:
+  cmd.run:
+    - cwd: /root
+    - name: find /srv/suitecrm/sites/{{ app_name }} -type d -print0 | xargs -0 chown www-data:www-data;
+    - require:
+      - cmd: suitecrm_{{ app_name }}_perms
+
+suitecrm_{{ app_name }}_perms2:
+  cmd.run:
+    - cwd: /root
+    - name: cd /srv/suitecrm/sites/{{ app_name }}; chmod -R 775 cache custom modules themes data upload config_override.php;
+    - require:
+      - cmd: suitecrm_{{ app_name }}_owners
+
 {#
 {{ server.dir }}/suitecrm.conf:
   file.managed:
@@ -53,7 +67,7 @@ suitecrm_{{ app_name }}_perms:
 
 /srv/suitecrm/sites/{{ app_name }}/theme:
   file.directory:
-  - user: root
+  - user: www-data
   - group: www-data
   - mode: 770
   - makedirs: true
