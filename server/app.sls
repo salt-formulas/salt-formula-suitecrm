@@ -52,6 +52,15 @@ suitecrm_{{ app_name }}_perms2:
     - require:
       - cmd: suitecrm_{{ app_name }}_owners
 
+suitecrm_{{ app_name }}_cron:
+  file.managed:
+  - name: /etc/cron.d/suitecrm.conf
+  - source: salt://suitecrm/files/suitecrm-cron.conf
+  - user: root
+  - group: root
+  - mode: 644
+{#  - template: jinja #}
+
 {#
 {{ server.dir }}/suitecrm.conf:
   file.managed:
