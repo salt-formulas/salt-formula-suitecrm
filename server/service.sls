@@ -2,6 +2,9 @@
 
 {%- if server.enabled %}
 
+include:
+- apache.common.service
+ 
 suitecrm_packages:
   pkg.installed:
   - names:
@@ -15,20 +18,12 @@ suitecrm_packages:
 {%- elif grains.osfullname in ['CentOS'] %}
     - cronie
 {%- endif %}
+  - watch_in:
+    - service: apache_service
 
 suitecrm_dir:
   file.directory:
   - name: {{ server.dir }}/sites
   - makedirs: true
-
-suitecrm_service:
-  service.running:
-  - name: {{ server_apache.service_apache }}
-  - reload: true
-  - enable: true
-  - require:
-    - pkg: apache_packages
-  - watch:
-    - pkgs: suitecrm_packages
 
 {%- endif %}
