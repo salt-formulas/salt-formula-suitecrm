@@ -9,6 +9,7 @@ suitecrm_packages:
   pkg.installed:
   - names:
     - unzip
+    - php5-mysql
 
 suitecrm_dir:
   file.directory:
