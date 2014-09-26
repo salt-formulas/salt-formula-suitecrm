@@ -1,5 +1,4 @@
 {%- from "suitecrm/map.jinja" import server with context %}
-{%- from "apache/map.jinja" import server_apache with context %}
 
 {%- if server.enabled %}
 
