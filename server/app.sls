@@ -55,7 +55,7 @@ suitecrm_{{ app_name }}_perms2:
 suitecrm_{{ app_name }}_cron:
   file.managed:
   - name: /etc/cron.d/suitecrm.conf
-  - source: salt://suitecrm/files/suitecrm-cron.conf
+  - source: salt://suitecrm/conf/suitecrm-cron.conf
   - user: root
   - group: root
   - mode: 644
