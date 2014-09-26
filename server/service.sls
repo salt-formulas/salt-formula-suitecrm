@@ -23,7 +23,7 @@ suitecrm_dir:
 
 suitecrm_service:
   service.running:
-  - name: {{ server_apache.service }}
+  - name: {{ server_apache.service_apache }}
   - reload: true
   - enable: true
   - require:
