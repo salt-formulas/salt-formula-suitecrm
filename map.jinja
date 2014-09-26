@@ -9,7 +9,7 @@
     },
 }, grain='kernel', merge=salt['pillar.get']('suitecrm:server')) %}
 
-{% set server = salt['grains.filter_by']({
+{% set server_apache = salt['grains.filter_by']({
     'Debian': {
         'pkgs_apache': ['apache2'],
         'service_apache': 'apache2',
