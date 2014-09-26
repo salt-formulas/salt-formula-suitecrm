@@ -7,7 +7,12 @@ suitecrm_packages:
     - unzip
 {%- if grains.osfullname in ['Ubuntu'] %}
     - php5-mysql
+    - php5-imap
+    - php5-curl
+    - php5-gd
     - cron
+{%- elif grains.osfullname in ['CentOS'] %}
+    - cronie
 {%- endif %}
 
 suitecrm_dir:
