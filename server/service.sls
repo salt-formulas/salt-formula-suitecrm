@@ -30,6 +30,6 @@ suitecrm_service:
   - require:
     - pkg: apache_packages
   - watch:
-    - pkgs: /suitecrm_package
+    - pkgs: suitecrm_packages
 
 {%- endif %}
