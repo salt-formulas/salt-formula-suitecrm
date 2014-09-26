@@ -1,4 +1,6 @@
 {%- from "suitecrm/map.jinja" import server with context %}
+{%- from "apache/map.jinja" import server_apache with context %}
+
 {%- if server.enabled %}
 
 suitecrm_packages:
@@ -19,5 +21,15 @@ suitecrm_dir:
   file.directory:
   - name: {{ server.dir }}/sites
   - makedirs: true
+
+suitecrm_service:
+  service.running:
+  - name: {{ server_apache.service }}
+  - reload: true
+  - enable: true
+  - require:
+    - pkg: apache_packages
+  - watch:
+    - pkgs: /suitecrm_package
 
 {%- endif %}
