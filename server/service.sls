@@ -14,6 +14,7 @@ suitecrm_packages:
     - php5-imap
     - php5-curl
     - php5-gd
+    - php-net-imap
     - cron
 {%- elif grains.osfullname in ['CentOS'] %}
     - cronie
