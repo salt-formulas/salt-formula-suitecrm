@@ -1,15 +1,14 @@
 {%- from "suitecrm/map.jinja" import server with context %}
 {%- if server.enabled %}
 
-{# include:
-- php
-#}
-
 suitecrm_packages:
   pkg.installed:
   - names:
     - unzip
+{%- if grains.osfullname in ['Ubuntu'] %}
     - php5-mysql
+    - cron
+{%- endif %}
 
 suitecrm_dir:
   file.directory:
