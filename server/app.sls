@@ -41,14 +41,14 @@ suitecrm_{{ app_name }}_perms:
 suitecrm_{{ app_name }}_owners:
   cmd.run:
     - cwd: /root
-    - name: find /srv/suitecrm/sites/{{ app_name }} -type d -print0 | xargs -0 chown www-data:www-data;
+    - name: chown www-data:www-data /srv/suitecrm/sites/{{ app_name }} -R;
     - require:
       - cmd: suitecrm_{{ app_name }}_perms
 
 suitecrm_{{ app_name }}_perms2:
   cmd.run:
     - cwd: /root
-    - name: cd /srv/suitecrm/sites/{{ app_name }}; chmod -R 775 cache custom modules themes data upload config_override.php;
+    - name: cd /srv/suitecrm/sites/{{ app_name }}; chmod -R 775 cache custom modules themes data upload; chmod 664 config_override.php;
     - require:
       - cmd: suitecrm_{{ app_name }}_owners
 
