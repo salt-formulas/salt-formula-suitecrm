@@ -7,5 +7,10 @@
         'service': 'suitecrm',
         'app': {}
     },
+    'Debian': {
+        'pkgs': ['unzip','php5-mysql','php5-imap','php5-curl','php5-gd','php-net-imap','cron'],
+    },
+    'RedHat': {
+        'pkgs': ['cronie','unzip'],
+    },
 }, grain='kernel', merge=salt['pillar.get']('suitecrm:server')) %}
-

@@ -4,21 +4,10 @@
 
 include:
 - apache.common.service
- 
+
 suitecrm_packages:
   pkg.installed:
-  - names:
-    - unzip
-{%- if grains.osfullname in ['Ubuntu'] %}
-    - php5-mysql
-    - php5-imap
-    - php5-curl
-    - php5-gd
-    - php-net-imap
-    - cron
-{%- elif grains.osfullname in ['CentOS'] %}
-    - cronie
-{%- endif %}
+  - names: {{ server.pkgs }}
   - watch_in:
     - service: apache_service
 
