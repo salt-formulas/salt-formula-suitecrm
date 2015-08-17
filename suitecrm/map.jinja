@@ -1,0 +1,11 @@
+
+{%- set server = salt['grains.filter_by']({
+    'Debian': {
+        'pkgs': ['php5-mysql', 'php5-imap', 'php5-curl', 'php5-gd', 'php-net-imap', 'php5-imap', 'cron'],
+        'app': {}
+    },
+    'RedHat': {
+        'pkgs': ['cronie'],
+        'app': {}
+    },
+}, merge=salt['pillar.get']('suitecrm:server')) %}

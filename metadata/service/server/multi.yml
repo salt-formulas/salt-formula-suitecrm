@@ -1,0 +1,7 @@
+applications:
+- suitecrm
+parameters:
+  suitecrm:
+    server:
+      enabled: true
+      base_dir: /srv/suitecrm
