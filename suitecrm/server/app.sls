@@ -51,6 +51,7 @@ suitecrm_{{ app_name }}_perms:
   - require:
     - git: suitecrm_{{ app_name }}_git
 
+{#
 /srv/suitecrm/sites/{{ app_name }}/config.php:
   file.managed:
   - source: salt://suitecrm/files/config.php
@@ -58,8 +59,11 @@ suitecrm_{{ app_name }}_perms:
   - group: root
   - mode: 644
   - template: jinja
+  - defaults:
+      app_name: "{{ app_name }}"
   - require:
     - git: suitecrm_{{ app_name }}_git
+#}
 
 {%- endfor %}
 

@@ -1,5 +1,6 @@
 <?php
 {%- from "suitecrm/map.jinja" import server with context %}
+{%- set app = salt['pillar.get']('suitecrm:server:app:'+app_name) %}
 $sugar_config = array (
   'addAjaxBannedModules' =>
   array (
@@ -145,7 +146,7 @@ $sugar_config = array (
     array (
       'name' => 'Euro',
       'iso4217' => 'EUR',
-      'symbol' => '~B�',
+      'symbol' => '€',
     ),
     'HKD' =>
     array (
@@ -157,13 +158,13 @@ $sugar_config = array (
     array (
       'name' => 'Indian Rupees',
       'iso4217' => 'INR',
-      'symbol' => '~B�',
+      'symbol' => '₨',
     ),
     'KRW' =>
     array (
       'name' => 'Korean Won',
       'iso4217' => 'KRW',
-      'symbol' => '~B�',
+      'symbol' => '₩',
     ),
     'YEN' =>
     array (
@@ -267,7 +268,7 @@ $sugar_config = array (
   array (
     'en_us' => 'English (US)',
     'es_es' => 'Español (ES)',
-    'ru_ru' => '| ~C~A~Aкий (RU)',
+    'ru_ru' => 'Русский (RU)',
   ),
   'large_scale_test' => false,
   'lead_conv_activity_opt' => 'donothing',
