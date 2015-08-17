@@ -1,6 +1,5 @@
-{%- if pillar.suitecrm is defined %}
-include:
+
 {%- if pillar.suitecrm.server is defined %}
+include:
 - suitecrm.server
-{%- endif %}
 {%- endif %}

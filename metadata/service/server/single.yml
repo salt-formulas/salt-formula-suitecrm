@@ -11,6 +11,7 @@ parameters:
   suitecrm:
     server:
       enabled: true
+      base_dir: /srv/suitecrm
       app:
         devel1:
           enabled: true
