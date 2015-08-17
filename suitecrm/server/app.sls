@@ -13,20 +13,10 @@ include:
   - mode: 755
   - makedirs: true
 
-suitecrm_{{ app_name }}_archive:
-  archive.extracted:
-  - name: /root
-  - source: {{ app.source.engine }}://{{ app.source.host }}/{{ app.source.file }}
-  - archive_format: zip
-  - if_missing: /root/suitecrm-{{ app.version }}-max
-  - require:
-    - pkg: suitecrm_packages
-    - file: suitecrm_dir
-
 suitecrm_{{ app_name }}_git:
   git.latest:
-  - name: {{ server.git_source }}
-  - rev: stable/{{ app.version }}
+  - name: {{ server.source.address }}
+  - rev: {{ server.source.revision }}
   - target: {{ server.base_dir }}/sites/{{ app_name }} 
   - require:
     - pkg: git_packages
